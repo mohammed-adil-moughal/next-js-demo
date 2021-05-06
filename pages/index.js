@@ -1,13 +1,20 @@
 import Head from 'next/head'
 import Image from 'next/image'
+import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import Card from '../components/card'
 import { increment } from '../redux/ducks/counter'
+import { getUsers } from '../redux/ducks/user'
 import styles from '../styles/Home.module.css'
 
 const Home = () => {
+  
   const count = useSelector(state => state.counter.count)
+
+  const states = useSelector(state => state.users)
+  console.log(states)
   const dispatch = useDispatch()
+  useEffect(()=>{ dispatch(getUsers())},[])
   const handleIncrement = () => {
     dispatch(increment())
   }
