@@ -7,7 +7,7 @@ import styles from '../styles/Home.module.css'
 const Home = () => {
   const users = useSelector(state => state.user.users.results)
   const dispatch = useDispatch()
-  useEffect(()=>{ dispatch(getUsers())},[])
+  useEffect(() => { dispatch(getUsers()) }, [])
 
   if (users) {
     return (
@@ -16,17 +16,17 @@ const Home = () => {
           <h1>
             Welcome to our list of humans
           </h1>
-  
+
           <div className={styles.grid}>
             {
-          users.map((user) => (
-            <UserCard 
-            firstName = {user.name.first}
-            lastName = {user.name.last}
-            image = {user.picture.large}
-            email = {user.email}
-            uuid = {user.login.uuid}/>
-          ))}
+              users.map((user) => (
+                <UserCard
+                  firstName={user.name.first}
+                  lastName={user.name.last}
+                  image={user.picture.large}
+                  email={user.email}
+                  uuid={user.login.uuid} />
+              ))}
           </div>
         </main>
       </div>
@@ -34,6 +34,6 @@ const Home = () => {
   } else {
     return "Loading State"
   }
-  
+
 }
 export default Home;
