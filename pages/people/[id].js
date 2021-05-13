@@ -2,7 +2,7 @@ import { useRouter } from 'next/router'
 import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { getUsers } from '../../redux/ducks/user'
-import HeaderCard from '../../components/humanPage/headerCard';
+import HumanPage from '../../components/humanPage';
 const Human = () => {
     const router = useRouter()
     const { id } = router.query
@@ -14,7 +14,7 @@ const Human = () => {
         console.log(user)
         return (
             <div >
-                <HeaderCard
+                <HumanPage
                     user={user}
                 />
             </div>

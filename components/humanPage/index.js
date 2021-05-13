@@ -1,6 +1,6 @@
 import styles from '../../styles/Home.module.css'
 
-const Card = ({ user }) => {
+const HumanPage = ({ user }) => {
     if (user) {
         const registeredDate = new Date(user.registered.date);
         const dateTimeFormat = new Intl.DateTimeFormat('en', {
@@ -53,4 +53,4 @@ const Card = ({ user }) => {
     }
     else return "Loading State"
 }
-export default Card 
+export default HumanPage 
