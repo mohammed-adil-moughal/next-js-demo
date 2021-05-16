@@ -9,21 +9,32 @@ import styles from '../styles/Home.module.css'
 import FuzzySearch from 'react-fuzzy'
 const Home = () => {
   let users = useSelector(state => state.user.users)
-  
+
   const sortedUsers = useSelector(state => state.user.sortedUsers)
-  if (Object.keys(sortedUsers).length !== 0) { 
+  if (Object.keys(sortedUsers).length !== 0) {
     users = sortedUsers
   }
-  
+
   const dispatch = useDispatch()
-  const sortAlphabetically = () => {
+  const sortAlphabetically = (name) => {
+
     const newArray = [].concat(users)
     const orgArray = newArray.sort(function (a, b) {
-      var nameA = a.name.first.toUpperCase();
-      var nameB = b.name.first.toUpperCase();
-      if (nameA < nameB) {
+      //default first name sort
+      let fieldA = a.name.first.toUpperCase();
+      let fieldB = b.name.first.toUpperCase();
+      if (name === 'email') {
+        fieldA = a.email.toUpperCase();
+        fieldB = b.email.toUpperCase();
+      }
+      if (name === 'last') {
+        fieldA = a.name.last.toUpperCase();
+        fieldB = b.name.last.toUpperCase();
+      }
+
+      if (fieldA < fieldB) {
         return -1;
-      } else if (nameA > nameB) {
+      } else if (fieldA > fieldB) {
         return 1;
       }
       return 0;
@@ -33,30 +44,36 @@ const Home = () => {
   useEffect(() => { dispatch(getUsers()) }, [])
   if (Object.keys(users).length !== 0) {
     return (
-      <div>
-        <FuzzySearch
-          list={users}
-          keys={['name.first', 'name.last']}
-          width={430}
-          onSelect = {()=>{}}
-          resultsTemplate={(props, state) => {
-            return state.results.map((user) =>
-              <SearchCard
-                key={user.login.uuid}
-                firstName={user.name.first}
-                lastName={user.name.last}
-                image={user.picture.medium}
-                uuid={user.login.uuid} />
-            );
-          }}
-        />
-        <main className={styles.main}>
-          <h1>
-            Welcome to our list of humans
+      <div className={styles.parentContainer}>
+        <h1>
+          Welcome to our list of humans
           </h1>
-          <div>
-            Click to sort by <button onClick={sortAlphabetically}> Name </button>
+        <div className={styles.searchHeader}>
+          <FuzzySearch
+            list={users}
+            keys={['name.first', 'name.last']}
+            width={500}
+            onSelect={() => { }}
+            resultsTemplate={(props, state) => {
+              return state.results.map((user) =>
+                <SearchCard
+                  key={user.login.uuid}
+                  firstName={user.name.first}
+                  lastName={user.name.last}
+                  image={user.picture.medium}
+                  uuid={user.login.uuid} />
+              );
+            }}
+          />
+          <div className={styles.sortContainer}>
+            SORT BY
+            <button className={styles.abutton} onClick={() => sortAlphabetically('first')}> FIRST NAME </button>
+            <button className={styles.abutton} onClick={() => sortAlphabetically('last')}> LAST NAME </button>
+            <button className={styles.abutton} onClick={() => sortAlphabetically('email')}> EMAIL </button>
           </div>
+        </div>
+        <main className={styles.main}>
+
           <div className={styles.grid}>
             {
               users.map((user) => (
