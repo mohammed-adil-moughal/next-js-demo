@@ -6,10 +6,10 @@ import HumanPage from '../../components/humanPage';
 const Human = () => {
     const router = useRouter()
     const { id } = router.query
-    const users = useSelector(state => state.user.users.results)
+    const users = useSelector(state => state.user.users)
     const dispatch = useDispatch()
     useEffect(() => { dispatch(getUsers()) }, [])
-    if (users) {
+    if (Object.keys(users).length !== 0) {
         const user = filterUser(id, users)[0];
         return (
             <div >
