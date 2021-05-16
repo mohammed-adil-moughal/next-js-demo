@@ -11,7 +11,6 @@ const Human = () => {
     useEffect(() => { dispatch(getUsers()) }, [])
     if (users) {
         const user = filterUser(id, users)[0];
-        console.log(user)
         return (
             <div >
                 <HumanPage

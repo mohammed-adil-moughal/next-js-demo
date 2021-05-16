@@ -49,3 +49,19 @@
 .headerImage {
   height: 100%;
 }
+
+.searchCard {
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+  border: 1px solid #eaeaea;
+  margin: 1rem;
+  padding: 1rem;
+  display: flex;
+  justify-content: end;
+}
+.searchCardImage {
+  height: auto;
+}
+
+.searchCardContainer {
+  padding: 2px 16px;
+}

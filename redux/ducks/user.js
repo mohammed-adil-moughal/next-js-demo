@@ -1,26 +1,34 @@
 export const GET_USERS = 'GET_USERS'
+export const SORT_USERS = 'SORT_USERS'
 const SET_USERS = 'SET_USERS'
 
 export const getUsers = () => ({
     type: GET_USERS
 })
-// https://randomuser.me/api/?results=50
+export const sortUsers = (users) => ({
+    type: SORT_USERS, sortedUsers: users
+})
+
 export const setUsers = (users) => ({
     type: SET_USERS, users: users
 })
 
 const initialState = {
-    users : {}
+    users : {},
+    sortedUsers : {}
 }
 
-const Counter = (state = initialState, action) => {
+const StateManipulator = (state = initialState, action) => {
     switch(action.type) {
         case SET_USERS:
             const {users} = action
-            return { ...state, users : users};
+            return { ...state, users : users.results};
+        case SORT_USERS:
+            const {sortedUsers} = action
+            return { ...state, sortedUsers: sortedUsers}
         default:
             return state;
     }
 }
 
-export default Counter
+export default StateManipulator
