@@ -15,7 +15,7 @@ export function* handleGetUser(action) {
 export function* handleSortUser(action) {
     try {
        console.log("sd");
-      const sortedUsers = yield sortAlphabetically(action.sortedUsers, action.sortField);
+      const sortedUsers = sortAlphabetically(action.sortedUsers, action.sortField);
       yield put(sortUsers(sortedUsers));
 
  } catch (error) {
