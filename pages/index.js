@@ -40,11 +40,6 @@ const UserGrid = styled.div`
 const Home = () => {
   let users = useSelector(state => state.user.users)
 
-  const sortedUsers = useSelector(state => state.user.sortedUsers)
-  if (Object.keys(sortedUsers).length !== 0) {
-    users = sortedUsers
-  }
-
   const dispatch = useDispatch()
   const sort = (name) => {
     dispatch(sortUsers(users, name))

@@ -14,9 +14,11 @@ export function* handleGetUser(action) {
 
 export function* handleSortUser(action) {
     try {
-       console.log("sd");
       const sortedUsers = sortAlphabetically(action.sortedUsers, action.sortField);
-      yield put(sortUsers(sortedUsers));
+      let data = {
+          'results':sortedUsers
+      }
+      yield put(setUsers(data));
 
  } catch (error) {
     console.log(error) 
