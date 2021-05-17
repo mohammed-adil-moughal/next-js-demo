@@ -5,8 +5,10 @@ const SET_USERS = 'SET_USERS'
 export const getUsers = () => ({
     type: GET_USERS
 })
-export const sortUsers = (users) => ({
-    type: SORT_USERS, sortedUsers: users
+export const sortUsers = (users, name) => ({
+    type: SORT_USERS,
+    sortedUsers: users,
+    sortField: name
 })
 
 export const setUsers = (users) => ({
@@ -15,7 +17,6 @@ export const setUsers = (users) => ({
 
 const initialState = {
     users : {},
-    sortedUsers : {}
 }
 
 const StateManipulator = (state = initialState, action) => {
@@ -23,9 +24,6 @@ const StateManipulator = (state = initialState, action) => {
         case SET_USERS:
             const {users} = action
             return { ...state, users : users.results};
-        case SORT_USERS:
-            const {sortedUsers} = action
-            return { ...state, sortedUsers: sortedUsers}
         default:
             return state;
     }
