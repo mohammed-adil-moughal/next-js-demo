@@ -46,31 +46,10 @@ const Home = () => {
   }
 
   const dispatch = useDispatch()
-  const sortAlphabetically = (name) => {
-
-    const newArray = [].concat(users)
-    const orgArray = newArray.sort(function (a, b) {
-      //default first name sort
-      let fieldA = a.name.first.toUpperCase();
-      let fieldB = b.name.first.toUpperCase();
-      if (name === 'email') {
-        fieldA = a.email.toUpperCase();
-        fieldB = b.email.toUpperCase();
-      }
-      if (name === 'last') {
-        fieldA = a.name.last.toUpperCase();
-        fieldB = b.name.last.toUpperCase();
-      }
-
-      if (fieldA < fieldB) {
-        return -1;
-      } else if (fieldA > fieldB) {
-        return 1;
-      }
-      return 0;
-    })
-    dispatch(sortUsers(orgArray))
+  const sort = (name) => {
+    dispatch(sortUsers(users, name))
   }
+
   useEffect(() => { dispatch(getUsers()) }, [])
   if (Object.keys(users).length !== 0) {
     return (
@@ -97,9 +76,9 @@ const Home = () => {
           />
           <SortContainer>
             SORT BY
-            <SortButton onClick={() => sortAlphabetically('first')}> FIRST NAME </SortButton>
-            <SortButton onClick={() => sortAlphabetically('last')}> LAST NAME </SortButton>
-            <SortButton onClick={() => sortAlphabetically('email')}> EMAIL </SortButton>
+            <SortButton onClick={() => sort('first')}> FIRST NAME </SortButton>
+            <SortButton onClick={() => sort('last')}> LAST NAME </SortButton>
+            <SortButton onClick={() => sort('email')}> EMAIL </SortButton>
           </SortContainer>
         </SearchHeader>
         <main>
