@@ -1,12 +1,42 @@
 import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
+import FuzzySearch from 'react-fuzzy'
+import styled from 'styled-components'
+
 import UserCard from '../components/userCard'
 import SearchCard from '../components/search/searchCard'
+
 import { getUsers } from '../redux/ducks/user'
 import { sortUsers } from '../redux/ducks/user'
 
-import styles from '../styles/Home.module.css'
-import FuzzySearch from 'react-fuzzy'
+const Container = styled.div`
+  padding: 2px 16px;
+  box-sizing: border-box;
+  
+`;
+const SearchHeader = styled.div`
+  padding: 10px;
+`
+const SortContainer = styled.div`
+  margin-top: 10px;
+  padding: 2px;
+`
+const SortButton = styled.button`
+  background-color: #325fb3;
+  border: none;
+  color: white;
+  padding: 10px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 14px;
+  margin: 2px 2px;
+`
+const UserGrid = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+`
 const Home = () => {
   let users = useSelector(state => state.user.users)
 
@@ -44,11 +74,11 @@ const Home = () => {
   useEffect(() => { dispatch(getUsers()) }, [])
   if (Object.keys(users).length !== 0) {
     return (
-      <div className={styles.parentContainer}>
+      <Container>
         <h1>
           Welcome to our list of humans
           </h1>
-        <div className={styles.searchHeader}>
+        <SearchHeader>
           <FuzzySearch
             list={users}
             keys={['name.first', 'name.last']}
@@ -65,16 +95,16 @@ const Home = () => {
               );
             }}
           />
-          <div className={styles.sortContainer}>
+          <SortContainer>
             SORT BY
-            <button className={styles.abutton} onClick={() => sortAlphabetically('first')}> FIRST NAME </button>
-            <button className={styles.abutton} onClick={() => sortAlphabetically('last')}> LAST NAME </button>
-            <button className={styles.abutton} onClick={() => sortAlphabetically('email')}> EMAIL </button>
-          </div>
-        </div>
-        <main className={styles.main}>
+            <SortButton onClick={() => sortAlphabetically('first')}> FIRST NAME </SortButton>
+            <SortButton onClick={() => sortAlphabetically('last')}> LAST NAME </SortButton>
+            <SortButton onClick={() => sortAlphabetically('email')}> EMAIL </SortButton>
+          </SortContainer>
+        </SearchHeader>
+        <main>
 
-          <div className={styles.grid}>
+          <UserGrid>
             {
               users.map((user) => (
                 <UserCard
@@ -85,9 +115,9 @@ const Home = () => {
                   email={user.email}
                   uuid={user.login.uuid} />
               ))}
-          </div>
+          </UserGrid>
         </main>
-      </div>
+      </Container>
     )
   } else {
     return "Loading State"
