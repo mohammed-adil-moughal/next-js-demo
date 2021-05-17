@@ -22,3 +22,5 @@ Improvements
 
 1) Add ENV file and support for maintaining things like External URLS
 2) Add Pagination for fetched data
+3) Move Styled components to a different file style.js
+4) Absolute imports to avoid accessing file paths directly
