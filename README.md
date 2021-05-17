@@ -18,6 +18,7 @@ Profile Page
 ![image](https://user-images.githubusercontent.com/10894677/118393389-88dc3c00-b647-11eb-864e-03607bffe423.png)
 
 Architecture 
+```
  The high level structure
     Components - Store components for pages as well as reusable components
       humanPage - Basic Component to feed the Individual user INFO page
@@ -40,7 +41,7 @@ Architecture
     Styles - default with NEXT JS
     Utilities - Harbour all ulitity and reusable functions
       sort - function to take a list and sort based on key
-       
+   ```    
 
 Improvements
 
